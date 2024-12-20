@@ -1,0 +1,27 @@
+﻿@model WebApplication1.Models.Airport
+
+<h2>Add Airport</h2>
+@using (Html.BeginForm("AddAirport", "Admin", FormMethod.Post))
+{
+    <div>
+        <label>Airport Name:</label>
+        @Html.TextBoxFor(a => a.Name)
+        @Html.ValidationMessageFor(a => a.Name)
+    </div>
+    <div>
+        <label>Code:</label>
+        @Html.TextBoxFor(a => a.Code)
+        @Html.ValidationMessageFor(a => a.Code)
+    </div>
+    <div>
+        <label>City:</label>
+        @Html.TextBoxFor(a => a.City)
+        @Html.ValidationMessageFor(a => a.City)
+    </div>
+    <div>
+        <label>Country:</label>
+        @Html.TextBoxFor(a => a.Country)
+        @Html.ValidationMessageFor(a => a.Country)
+    </div>
+    <button type="submit">Add Airport</button>
+}

@@ -1,0 +1,41 @@
+﻿@model List<WebApplication1.Models.Flight>
+
+@{
+    ViewData["Title"] = "ViewFlights";
+}
+
+
+<h1>ViewFlights</h1>
+
+
+
+
+<h2>Flight List</h2>
+
+<table border="1" style="width: 100%; text-align: left;">
+    <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.DepartureAirport.Name (@flight.DepartureAirport.Code)</td>
+                <td>@flight.ArrivalAirport.Name (@flight.ArrivalAirport.Code)</td>
+                <td>@flight.DepartureTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@flight.ArrivalTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@flight.Price.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+
+    <a asp-action="Dashboard" asp-controller="Admin" >Back to Dashboard</a>
+</table>

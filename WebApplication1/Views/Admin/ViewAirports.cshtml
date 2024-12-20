@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication1.Models.Airport>
+
+<h2>All Airports</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var airport in Model)
+        {
+            <tr>
+                <td>@airport.Name</td>
+                <td>@airport.Code</td>
+                <td>@airport.City</td>
+                <td>@airport.Country</td>
+                <td>
+                    <a href="@Url.Action("DeleteAirport", "Admin", new { id = airport.AirportId })"
+                       onclick="return confirm('Are you sure you want to delete this airport?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

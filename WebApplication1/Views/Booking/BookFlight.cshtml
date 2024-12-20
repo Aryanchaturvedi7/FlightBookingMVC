@@ -1,0 +1,19 @@
+﻿@model WebApplication1.Models.Flight
+
+<h2>Book Flight</h2>
+
+<div>
+    <p><strong>Flight Number:</strong> @Model.FlightNumber</p>
+    <p><strong>From:</strong> @Model.DepartureAirportId</p>
+    <p><strong>To:</strong> @Model.ArrivalAirportId</p>
+    <p><strong>Departure:</strong> @Model.DepartureTime</p>
+    <p><strong>Arrival:</strong> @Model.ArrivalTime</p>
+    <p><strong>Price:</strong> @Model.Price</p>
+</div>
+
+<form asp-action="ConfirmBooking" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="FlightId" value="@Model.FlightId" />
+    <input type="hidden" name="TotalPrice" value="@Model.Price" />
+    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+</form>

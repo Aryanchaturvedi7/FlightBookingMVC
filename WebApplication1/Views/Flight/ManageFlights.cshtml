@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Flight>
+
+<h2>Manage Flights</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.DepartureAirport.Name</td>
+                <td>@flight.ArrivalAirport.Name</td>
+                <td>@flight.DepartureTime</td>
+                <td>@flight.ArrivalTime</td>
+                <td>@flight.Price</td>
+                <td>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" style="display: inline-block;">
+                            <a href="@Url.Action("EditFlight", "Flight", new { id = flight.FlightId })" style="text-decoration: none;">Edit</a>
+                        </button>
+                        @using (Html.BeginForm("DeleteFlight", "Flight", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@flight.FlightId" />
+                            <button type="submit" style="display: inline-block;">Delete</button>
+                        }
+                        <a href="@Url.Action("ViewFlights", "Flight", new { id = flight.FlightId })" style="display: inline-block; text-decoration: none;">View Details</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

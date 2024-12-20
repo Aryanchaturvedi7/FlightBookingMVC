@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebApplication1.Models.Flight>
+
+@{
+    ViewData["Title"] = "Search Flights";
+}
+
+<h2>Search Flights</h2>
+
+@using (Html.BeginForm("SearchFlights", "Flight", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <label>Departure Airport:</label>
+    <select name="departureAirportId">
+        <option value="">Select Departure Airport</option>
+        @if (ViewBag.Airports != null)
+        {
+            foreach (var airport in (SelectList)ViewBag.Airports)
+            {
+                <option value="@airport.Value">@airport.Text</option>
+            }
+        }
+    </select>
+
+    <label>Arrival Airport:</label>
+    <select name="arrivalAirportId">
+        <option value="">Select Arrival Airport</option>
+        @if (ViewBag.Airports != null)
+        {
+            foreach (var airport in (SelectList)ViewBag.Airports)
+            {
+                <option value="@airport.Value">@airport.Text</option>
+            }
+        }
+    </select>
+
+    <button type="submit">Search</button>
+}
+
+@if (Model.Any())
+{
+    <h3>Available Flights</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure Airport</th>
+                <th>Arrival Airport</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flight in Model)
+            {
+                <tr>
+                    <td>@flight.FlightNumber</td>
+                    <td>@flight.DepartureAirport.Name</td>
+                    <td>@flight.ArrivalAirport.Name</td>
+                    <td>@flight.DepartureTime</td>
+                    <td>@flight.ArrivalTime</td>
+                    <td>@flight.Price</td>
+                    <td>
+                        <form asp-action="BookFlight" asp-controller="Booking" method="get">
+                            <input type="hidden" name="flightId" value="@flight.FlightId" />
+                            <button type="submit" class="btn btn-primary">Book</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model != null)
+{
+    <p>No flights found for the selected criteria.</p>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div style="color:red;">@ViewBag.Message</div>
+}

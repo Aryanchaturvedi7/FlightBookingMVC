@@ -1,0 +1,52 @@
+﻿@model WebApplication1.Models.Flight
+
+<h2>Add Flight</h2>
+
+@using (Html.BeginForm("AddFlight", "Flight", FormMethod.Post))
+{
+    <div>
+        <label>Flight Number:</label>
+        @Html.TextBoxFor(m => m.FlightNumber)
+        @Html.ValidationMessageFor(m => m.FlightNumber)
+    </div>
+
+    <div>
+        <label>Departure Airport:</label>
+        @Html.DropDownListFor(m => m.DepartureAirportId,
+                (SelectList)ViewBag.Airports,
+                "Select Departure Airport")
+        @Html.ValidationMessageFor(m => m.DepartureAirportId)
+    </div>
+
+
+    <div>
+        <label>Arrival Airport:</label>
+        @Html.DropDownListFor(m => m.ArrivalAirportId,
+                (SelectList)ViewBag.Airports, // Correctly bind the SelectList to the dropdown
+                "Select Arrival Airport")
+        @Html.ValidationMessageFor(m => m.ArrivalAirportId)
+    </div>
+
+    <div>
+        <label>Departure Time:</label>
+        @Html.TextBoxFor(m => m.DepartureTime, "{0:yyyy-MM-ddTHH:mm}", new { @type = "datetime-local" })
+        @Html.ValidationMessageFor(m => m.DepartureTime)
+    </div>
+
+    <div>
+        <label>Arrival Time:</label>
+        @Html.TextBoxFor(m => m.ArrivalTime, "{0:yyyy-MM-ddTHH:mm}", new { @type = "datetime-local" })
+        @Html.ValidationMessageFor(m => m.ArrivalTime)
+    </div>
+
+    <div>
+        <label>Price:</label>
+        @Html.TextBoxFor(m => m.Price)
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <button type="submit">Add Flight</button>
+}
+
+   
+

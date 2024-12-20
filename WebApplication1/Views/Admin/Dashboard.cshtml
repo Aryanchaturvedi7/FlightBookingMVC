@@ -1,0 +1,27 @@
+﻿@model WebApplication1.Models.Flight
+
+@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+@* <p>Welcome, @HttpContext.Session.GetString("Username")!</p> *@
+
+<div>
+    <h3>Flight Management</h3>
+    <ul>
+        <li><a href="@Url.Action("ViewFlights", "Flight")">View All Flights</a></li>
+        <li><a href="@Url.Action("AddFlight", "Flight")">Add Flight</a></li>
+        <li>
+            <a href="@Url.Action("ManageFlights", "Flight")">Manage Flights</a>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h3>Airport Management</h3>
+    <ul>
+        <li><a href="@Url.Action("ViewAirports", "Admin")">View All Airports</a></li>
+        <li><a href="@Url.Action("AddAirport", "Admin")">Add Airport</a></li>
+    </ul>
+</div>
